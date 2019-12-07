@@ -1,4 +1,3 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
 from TelaCadCliente import *
 from Classes.Cliente import Cliente
 
@@ -28,10 +27,21 @@ class ConfiCadCliente(QtWidgets.QMainWindow, Ui_CadastroCliente):
             print(nome)
             result = c.caduser()
             if result:
+                self.limpaCampos()
                 self.mensagem("Sucesso","Cliente Cadastrado com sucesso!")
             else:
                 self.mensagem_erro("ERRO", "Não foi possivel cadatrar se o erro persistir contate um administrador")
 
+    def limpaCampos(self):
+        self.txtNome.setText("")
+        self.txtCpf.setText("")
+        self.txtTel.setText("")
+        self.txtCel.setText("")
+        self.txtRua.setText("")
+        self.txtNum.setText("")
+        self.txtBairro.setText("")
+        self.txtCidade.setText("")
+        self.txtCep.setText("")
 
 if __name__ == "__main__":
     import sys

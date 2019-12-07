@@ -1,5 +1,3 @@
-from PyQt5 import *
-from PyQt5 import QtCore, QtGui, QtWidgets
 from TelaInicio import *
 from ConfiCadCliente import *
 from ConfiBuscarCliente import *

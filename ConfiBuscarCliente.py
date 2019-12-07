@@ -1,4 +1,3 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
 from Classes.Mensagem import *
 from TelaBuscarCliente import *
 from Classes.Cliente import *
