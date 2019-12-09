@@ -1,4 +1,5 @@
 from TelaCadCliente import *
+from Classes.Mensagem import Mensagem
 from Classes.Cliente import Cliente
 
 
@@ -7,11 +8,11 @@ class ConfiCadCliente(QtWidgets.QMainWindow, Ui_CadastroCliente):
         super(ConfiCadCliente, self).__init__()
         self.setupUi(self)
         self.btnCadastrar.clicked.connect(self.btnCadCliente)
-        pass
+        self.m = Mensagem()
 
 
     def btnCadCliente(self):
-        confirm = self.confirmacao("Confirmação", "Deseja Cadastrar esse Cliente?")
+        confirm = self.m.confirmacao("Confirmação", "Deseja Cadastrar esse Cliente?")
         if confirm:
             c = Cliente()
             nome = c.limpaMask(self.txtNome.text())
@@ -27,9 +28,9 @@ class ConfiCadCliente(QtWidgets.QMainWindow, Ui_CadastroCliente):
             result = c.caduser()
             if result:
                 self.limpaCampos()
-                self.mensagem("Sucesso","Cliente Cadastrado com sucesso!")
+                self.m.mensagem("Sucesso","Cliente Cadastrado com sucesso!")
             else:
-                self.mensagem_erro("ERRO", "Não foi possivel cadatrar se o erro persistir contate um administrador")
+                self.m.mensagem_erro("ERRO", "Não foi possivel cadastrar se o erro persistir contate um administrador")
 
     def limpaCampos(self):
         self.txtNome.setText("")

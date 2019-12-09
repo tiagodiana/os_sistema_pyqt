@@ -30,8 +30,10 @@ class ConfiBuscarCliente(QtWidgets.QMainWindow, Ui_BuscarCliente):
                 self.txtCidade.setText(self.dados['cidade'])
                 self.cmbUF.findText(self.dados['estado'])
                 self.txtCep.setText(self.dados['CEP'])
-            else:
+            elif self.dados == None:
                 self.m.mensagem_erro("Erro", "Não existe esse CPF cadastrado")
+            else:
+                self.m.mensagem_erro("Erro Servidor", "Erro ao conectar com o servidor")
         else:
             self.m.mensagem_erro("Erro", "Insira um CPF para a busca")
 

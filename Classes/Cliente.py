@@ -53,23 +53,35 @@ class Cliente():
 
     # FUNÇÃO PARA CADASTRAR CLIENTE
     def caduser(self):
-        data = {'tipo': 'inserir', 'nome': self.nome, 'cpf': self.cpf, 'telefone': self.tel, 'celular':self.cel, 'rua': self.rua, 'bairro':self.bairro, 'cidade':self.cidade, 'estado':self.estado, 'cep':self.cep}
-        req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
-        if int(req.text) > 0:
-            return True
-        else:
+        try:
+            data = {'tipo': 'inserir', 'nome': self.nome, 'cpf': self.cpf, 'telefone': self.tel, 'celular':self.cel, 'rua': self.rua, 'bairro':self.bairro, 'cidade':self.cidade, 'estado':self.estado, 'cep':self.cep}
+            req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
+            if int(req.text) > 0:
+                return True
+            else:
+                return False
+        except:
             return False
+            print('Erro na conexão com o banco de dados')
 
     def buscauser(self, cpf):
-        data = {'tipo': 'buscar_user', 'cpf': self.limpaMask(cpf)}
-        req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
-        json = req.json()
-        return json
+        try:
+            data = {'tipo': 'buscar_user', 'cpf': self.limpaMask(cpf)}
+            req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
+            json = req.json()
+            return json
+        except:
+            return False
+            print('Erro na conexão com o banco de dados')
 
     def alterarcliente(self):
-        data = {'tipo': 'alterar_user', 'nome': self.nome, 'cpf': self.cpf, 'telefone': self.tel, 'celular': self.cel, 'rua': self.rua, 'bairro': self.bairro, 'cidade': self.cidade, 'estado': self.estado, 'cep': self.cep, 'id': self.id}
-        req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
-        if int(req.text) > 0:
-            return True
-        else:
+        try:
+            data = {'tipo': 'alterar_user', 'nome': self.nome, 'cpf': self.cpf, 'telefone': self.tel, 'celular': self.cel, 'rua': self.rua, 'bairro': self.bairro, 'cidade': self.cidade, 'estado': self.estado, 'cep': self.cep, 'id': self.id}
+            req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
+            if int(req.text) > 0:
+                return True
+            else:
+                return False
+        except:
             return False
+            print('Erro na conexão com o banco de dados')
