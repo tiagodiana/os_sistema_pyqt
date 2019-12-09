@@ -4,8 +4,6 @@ from Classes.Cliente import *
 
 
 class ConfiBuscarCliente(QtWidgets.QMainWindow, Ui_BuscarCliente):
-
-
     def __init__(self):
         super(ConfiBuscarCliente, self).__init__()
         self.setupUi(self)
@@ -15,24 +13,23 @@ class ConfiBuscarCliente(QtWidgets.QMainWindow, Ui_BuscarCliente):
 
     def buscarClientes(self):
         c = Cliente()
-
         self.dados = ""
         cpf = c.limpaMask(self.txtCpf.text())
         if cpf != "":
             self.dados = c.buscauser(cpf)
             if self.dados:
-                end = str(self.dados[5]).split('-')
+                end = str(self.dados['rua']).split('-')
                 self.ativarComponentes()
-                self.txtNome.setText(self.dados[1])
-                self.txtCpf.setText(self.dados[2])
-                self.txtTel.setText(self.dados[3])
-                self.txtCel.setText(self.dados[4])
+                self.txtNome.setText(self.dados['nome'])
+                self.txtCpf.setText(self.dados['cpf'])
+                self.txtTel.setText(self.dados['telefone'])
+                self.txtCel.setText(self.dados['celular'])
                 self.txtRua.setText(end[0])
                 self.txtNum.setText(end[1])
-                self.txtBairro.setText(self.dados[6])
-                self.txtCidade.setText(self.dados[7])
-                self.cmbUF.findText(self.dados[8])
-                self.txtCep.setText(self.dados[9])
+                self.txtBairro.setText(self.dados['bairro'])
+                self.txtCidade.setText(self.dados['cidade'])
+                self.cmbUF.findText(self.dados['estado'])
+                self.txtCep.setText(self.dados['CEP'])
             else:
                 self.m.mensagem_erro("Erro", "Não existe esse CPF cadastrado")
         else:
@@ -41,7 +38,7 @@ class ConfiBuscarCliente(QtWidgets.QMainWindow, Ui_BuscarCliente):
     def alterarCliente(self):
         confirmacao = self.m.confirmacao("Confirmação", "Deseja alterar os dados desse cliente?")
         if confirmacao:
-            id = self.dados[0]
+            id = self.dados['id']
             nome = self.txtNome.text()
             cpf = self.txtCpf.text()
             tel = self.txtTel.text()
@@ -89,7 +86,6 @@ class ConfiBuscarCliente(QtWidgets.QMainWindow, Ui_BuscarCliente):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     ui = ConfiBuscarCliente()
     ui.show()

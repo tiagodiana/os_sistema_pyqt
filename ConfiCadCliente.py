@@ -24,7 +24,6 @@ class ConfiCadCliente(QtWidgets.QMainWindow, Ui_CadastroCliente):
             estado = c.limpaMask(self.cmbUF.currentText())
             cep = c.limpaMask(self.txtCep.text())
             c.inserirdados(nome, cpf, tel, cel, rua, bairro, cidade, estado, cep)
-            print(nome)
             result = c.caduser()
             if result:
                 self.limpaCampos()

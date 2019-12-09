@@ -1,8 +1,8 @@
-from Classes.Conexao import Conexao
+import requests
+# http://localhost/osapp/server/webservice.php
 
 
-# CLASSE CLIENTE HERDA A CLASSE CONEXAO
-class Cliente(Conexao):
+class Cliente():
     id = ''
     nome = ''
     cpf = ''
@@ -15,7 +15,7 @@ class Cliente(Conexao):
     cep = ''
 
     def __int__(self):
-        Conexao.__init__(self)
+        pass
 
     def limpaMask(self, txt):
         caracteres = ['(', ')', '-', '.', ' ', '\'', '\"']
@@ -29,15 +29,15 @@ class Cliente(Conexao):
 
     # INSERINDO DADOS DO CLIENTE
     def inserirdados(self, name, cpf, tel, cel, rua, bairro, cidade, estado, cep):
-        self.nome = name
-        self.cpf = self.limpaMask(cpf)
-        self.tel = self.limpaMask(tel)
-        self.cel = self.limpaMask(cel)
-        self.rua = rua
-        self.bairro = bairro
-        self.cidade = cidade
-        self.estado = self.limpaMask(estado)
-        self.cep = self.limpaMask(cep)
+        self.nome = str(name)
+        self.cpf = str(self.limpaMask(cpf))
+        self.tel = str(self.limpaMask(tel))
+        self.cel = str(self.limpaMask(cel))
+        self.rua = str(rua)
+        self.bairro = str(bairro)
+        self.cidade = str(cidade)
+        self.estado = str(self.limpaMask(estado))
+        self.cep = str(self.limpaMask(cep))
 
     def inserirdadosid(self,id, name, cpf, tel, cel, rua, bairro, cidade, estado, cep):
         self.id = id
@@ -53,39 +53,23 @@ class Cliente(Conexao):
 
     # FUNÇÃO PARA CADASTRAR CLIENTE
     def caduser(self):
-        try:
-            sql = 'INSERT INTO clientes VALUES(null,%s, %s, %s, %s, %s, %s, %s, %s, %s)'
-            self.cursor.execute(sql, (
-                self.nome, self.cpf, self.tel, self.cel, self.rua, self.bairro, self.cidade, self.estado, self.cep))
-            self.conn.commit()
-            self.conn.close()
+        data = {'tipo': 'inserir', 'nome': self.nome, 'cpf': self.cpf, 'telefone': self.tel, 'celular':self.cel, 'rua': self.rua, 'bairro':self.bairro, 'cidade':self.cidade, 'estado':self.estado, 'cep':self.cep}
+        req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
+        if int(req.text) > 0:
             return True
-
-        except:
+        else:
             return False
 
     def buscauser(self, cpf):
-        self.cpf = self.limpaMask(cpf)
-        try:
-            if cpf != "":
-                sql = 'SELECT * FROM clientes WHERE cpf LIKE %s'
-                self.cursor.execute(sql % self.cpf)
-                result = self.cursor.fetchone()
-                self.conn.close()
-                return result
-            else:
-                return False
-        except:
-            print("ERRO NA BUSCA")
-            return False
+        data = {'tipo': 'buscar_user', 'cpf': self.limpaMask(cpf)}
+        req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
+        json = req.json()
+        return json
 
     def alterarcliente(self):
-        try:
-            sql = 'UPDATE clientes SET nome = %s, cpf = %s, telefone = %s, celular = %s, rua = %s, bairro = %s, cidade = %s, estado = %s, cep = %s WHERE id = %s'
-            self.cursor.execute(sql, (self.nome, self.cpf, self.tel, self.cel, self.rua, self.bairro, self.cidade, self.estado, self.cep, int(self.id)))
-            self.conn.commit()
-            self.conn.close()
+        data = {'tipo': 'alterar_user', 'nome': self.nome, 'cpf': self.cpf, 'telefone': self.tel, 'celular': self.cel, 'rua': self.rua, 'bairro': self.bairro, 'cidade': self.cidade, 'estado': self.estado, 'cep': self.cep, 'id': self.id}
+        req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
+        if int(req.text) > 0:
             return True
-        except:
-            print('Erro ao atualizar')
+        else:
             return False
