@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>TelaNovaOs</class>
+ <widget class="QMainWindow" name="TelaNovaOs">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -20,7 +20,11 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Tela Nova Os</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/Icone/logo-icone.png</normaloff>:/Icone/logo-icone.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: 'dodgerblue';
@@ -62,7 +66,7 @@ background-color: rgb(85, 87, 83);</string>
      <rect>
       <x>60</x>
       <y>110</y>
-      <width>81</width>
+      <width>111</width>
       <height>21</height>
      </rect>
     </property>
@@ -70,7 +74,7 @@ background-color: rgb(85, 87, 83);</string>
      <string>Cliente</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="txtMarca">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -97,7 +101,7 @@ background-color: rgb(238, 238, 236);</string>
      <string>Tipo</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="cmbCliente">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -112,7 +116,7 @@ selection-background-color: rgb(136, 138, 133);
 background-color: rgb(238, 238, 236);</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_2">
+   <widget class="QComboBox" name="cmbTipo">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -173,7 +177,7 @@ background-color: rgb(238, 238, 236);</string>
      <string>Modelo</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="txtModelo">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -192,7 +196,7 @@ background-color: rgb(238, 238, 236);</string>
      <rect>
       <x>520</x>
       <y>180</y>
-      <width>81</width>
+      <width>101</width>
       <height>21</height>
      </rect>
     </property>
@@ -200,7 +204,7 @@ background-color: rgb(238, 238, 236);</string>
      <string>N°Serie</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
+   <widget class="QLineEdit" name="txtNumSerie">
     <property name="geometry">
      <rect>
       <x>520</x>
@@ -219,7 +223,7 @@ background-color: rgb(238, 238, 236);</string>
      <rect>
       <x>60</x>
       <y>250</y>
-      <width>81</width>
+      <width>101</width>
       <height>21</height>
      </rect>
     </property>
@@ -232,7 +236,7 @@ background-color: rgb(238, 238, 236);</string>
      <rect>
       <x>360</x>
       <y>250</y>
-      <width>81</width>
+      <width>121</width>
       <height>21</height>
      </rect>
     </property>
@@ -245,7 +249,7 @@ background-color: rgb(238, 238, 236);</string>
      <rect>
       <x>260</x>
       <y>430</y>
-      <width>61</width>
+      <width>81</width>
       <height>24</height>
      </rect>
     </property>
@@ -256,7 +260,7 @@ background-color: rgb(238, 238, 236);</string>
      <string>Valor</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_6">
+   <widget class="QLineEdit" name="txtValor">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -270,7 +274,7 @@ background-color: rgb(238, 238, 236);</string>
 background-color: rgb(238, 238, 236);</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnCadastrar">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -297,7 +301,7 @@ color: rgb(238, 238, 236);</string>
      <string>Cadastrar</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="txtDefeito">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -314,7 +318,7 @@ background-color: rgb(238, 238, 236);</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_2">
+   <widget class="QTextEdit" name="txtSolucao">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -334,16 +338,18 @@ background-color: rgb(238, 238, 236);</string>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>comboBox</tabstop>
-  <tabstop>comboBox_2</tabstop>
-  <tabstop>lineEdit_2</tabstop>
-  <tabstop>lineEdit_4</tabstop>
-  <tabstop>lineEdit_5</tabstop>
-  <tabstop>textEdit</tabstop>
-  <tabstop>textEdit_2</tabstop>
-  <tabstop>lineEdit_6</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>cmbCliente</tabstop>
+  <tabstop>cmbTipo</tabstop>
+  <tabstop>txtMarca</tabstop>
+  <tabstop>txtModelo</tabstop>
+  <tabstop>txtNumSerie</tabstop>
+  <tabstop>txtDefeito</tabstop>
+  <tabstop>txtSolucao</tabstop>
+  <tabstop>txtValor</tabstop>
+  <tabstop>btnCadastrar</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -9,6 +9,7 @@ class ConfiBuscarCliente(QtWidgets.QMainWindow, Ui_BuscarCliente):
         self.setupUi(self)
         self.btnBuscar.clicked.connect(self.buscarClientes)
         self.btnAlterar.clicked.connect(self.alterarCliente)
+        self.txtCpf.textChanged.connect(lambda: self.txtCpf.setStyleSheet('background:white'))
         self.m = Mensagem()
 
     def buscarClientes(self):
@@ -32,10 +33,15 @@ class ConfiBuscarCliente(QtWidgets.QMainWindow, Ui_BuscarCliente):
                 self.txtCep.setText(self.dados['CEP'])
             elif self.dados == None:
                 self.m.mensagem_erro("Erro", "Não existe esse CPF cadastrado")
+                self.txtCpf.clear()
+                self.txtCpf.setFocus()
             else:
                 self.m.mensagem_erro("Erro Servidor", "Erro ao conectar com o servidor")
+                self.txtCpf.setFocus()
         else:
             self.m.mensagem_erro("Erro", "Insira um CPF para a busca")
+            self.txtCpf.setStyleSheet('background: rgba(255,0,0,.8)')
+            self.txtCpf.setFocus()
 
     def alterarCliente(self):
         confirmacao = self.m.confirmacao("Confirmação", "Deseja alterar os dados desse cliente?")

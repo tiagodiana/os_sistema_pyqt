@@ -85,3 +85,13 @@ class Cliente():
         except:
             return False
             print('Erro na conexão com o banco de dados')
+
+    def alluser(self):
+        try:
+            data = {'tipo': 'all_user'}
+            req = requests.post('http://localhost/osapp/server/webservice.php', data=data, timeout=3000)
+            json = req.json()
+            return json
+        except:
+            return False
+            print('Erro na conexão com o banco de dados')

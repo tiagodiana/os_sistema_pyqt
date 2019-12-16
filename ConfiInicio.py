@@ -1,6 +1,7 @@
 from TelaInicio import *
 from ConfiCadCliente import *
 from ConfiBuscarCliente import *
+from ConfiNovaOs import *
 from ConfiSobre import *
 
 
@@ -12,6 +13,7 @@ class ConfiInicio(QtWidgets.QMainWindow, Ui_Main):
         self.showMaximized()
         self.menuCadastraCliente.triggered.connect(self.cadcliente)
         self.menuBuscarCliente.triggered.connect(self.buscacliente)
+        self.menuNovaOs.triggered.connect(self.telanovaos)
         self.menuSobre.triggered.connect(self.telasobre)
 
     def cadcliente(self):
@@ -22,6 +24,11 @@ class ConfiInicio(QtWidgets.QMainWindow, Ui_Main):
     def buscacliente(self):
         tela =QtWidgets.QDialog(self)
         tela.ui = ConfiBuscarCliente()
+        tela.ui.show()
+
+    def telanovaos(self):
+        tela = QtWidgets.QDialog(self)
+        tela.ui = ConfiNovaOs()
         tela.ui.show()
 
     def telasobre(self):
