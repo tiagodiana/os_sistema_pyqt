@@ -1,4 +1,5 @@
 from TelaNovaOs import *
+from Classes.Ordem import *
 from Classes.Cliente import *
 from Classes.Mensagem import *
 
@@ -21,21 +22,28 @@ class ConfiNovaOs(QtWidgets.QMainWindow, Ui_TelaNovaOs):
         self.btnCadastrar.clicked.connect(self.btncadastrarordem)
 
     def btncadastrarordem(self):
-        cliente = self.cmbCliente.currentText()
-        tipo = self.cmbTipo.currentText()
-        marca = self.txtMarca.text()
-        modelo = self.txtModelo.text()
-        num_serie = self.txtNumSerie.text()
-        defeito = self.txtDefeito.toPlainText()
-        solucao = self.txtSolucao.toPlainText()
-        valor = float(self.txtValor.text())
-
-
+        confirmacao = self.m.confirmacao("Confirmação", "Deseja Criar essa Ordem de Serviço?")
+        if confirmacao:
+            c = Ordem()
+            cliente = self.cmbCliente.currentText()
+            tipo = self.cmbTipo.currentText()
+            marca = self.txtMarca.text()
+            modelo = self.txtModelo.text()
+            num_serie = self.txtNumSerie.text()
+            defeito = self.txtDefeito.toPlainText()
+            solucao = self.txtSolucao.toPlainText()
+            valor = float(self.txtValor.text())
+            c.inserindodados_nova(cliente,tipo, marca,modelo , num_serie, defeito, solucao, valor)
+            result = c.novaos()
+            print(result)
+            if result:
+                self.m.mensagem("Sucesso", "Ordem de Serviço Criada com Sucesso")
+            else:
+                self.m.mensagem_erro("Erro", "Não foi possivel Cadastrar")
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     ui = ConfiNovaOs()
     ui.show()
