@@ -11,6 +11,7 @@ class ConfigBuscarOs(QtWidgets.QMainWindow, Ui_TelaBuscarOs):
         self.txtCliente.setEnabled(False)
         self.btnFinalizar.setEnabled(False)
         self.btnBuscar.clicked.connect(self.buscarordem)
+        self.btnFinalizar.clicked.connect(self.finalizar)
         self.btnAlterar.clicked.connect(self.alterarordem)
         self.btnDeletar.clicked.connect(self.deletarordem)
         self.btnLimpar.clicked.connect(self.limparCampos)
@@ -21,6 +22,7 @@ class ConfigBuscarOs(QtWidgets.QMainWindow, Ui_TelaBuscarOs):
         result = self.o.buscaros()
         if result:
             self.ativaCampos()
+            status = int(result['status'])
             self.txtCliente.setText(result['nome'])
             self.cmbTipo.findText(result['tipo'])
             self.txtMarca.setText(result['marca'])
@@ -28,10 +30,32 @@ class ConfigBuscarOs(QtWidgets.QMainWindow, Ui_TelaBuscarOs):
             self.txtNumSerie.setText(result['num_serie'])
             self.txtSolucao.setText(result['solucao'])
             self.txtDefeito.setText(result['defeito'])
+            if status > 0:
+                self.btnFinalizar.setEnabled(not self.btnFinalizar.isEnabled())
+                self.btnAlterar.setEnabled(not self.btnAlterar.isEnabled())
+                self.btnDeletar.setEnabled(not self.btnDeletar.isEnabled())
+                self.label_11.setStyleSheet('color:green; font: 36pt "Sans Serif";') 
+                self.label_11.setText('Finalizado')
+            else:
+                self.label_11.setStyleSheet('color:red; font: 36pt "Sans Serif";') 
+                self.label_11.setText('Aberta')
+                
             self.txtValor.setText(result['valor'])
         else:
             self.m.mensagem_erro("Erro", "Não foi possivel encontrar essa ordem")
             self.txtNumOrdem.setFocus()
+    def finalizar(self):
+        confirmacao = self.m.confirmacao("Confirmação", "Deseja finalizar essa ordem de serviço?")
+        if confirmacao:
+            id_os = self.txtNumOrdem.text()
+            self.o.inserirId(id_os)
+            result = self.o.finalizaros()
+            if result:
+                self.m.mensagem("Sucesso", "Ordem de Serviço finalizada com sucesso")
+            else:
+                self.m.mensagem_erro("Erro", "Erro não for possível finalizar a Ordem de Serviço")
+
+
 
     def alterarordem(self):
         confirmacao = self.m.confirmacao("Confirmação", "Deseja alterar essa ordem de serviço?")
@@ -89,6 +113,7 @@ class ConfigBuscarOs(QtWidgets.QMainWindow, Ui_TelaBuscarOs):
         self.txtSolucao.clear()
         self.txtDefeito.clear()
         self.txtValor.clear()
+        self.label_11.clear()
 
 
 

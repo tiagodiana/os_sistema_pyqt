@@ -3,6 +3,8 @@ from datetime import datetime
 
 
 class Ordem():
+    url = 'http://localhost/sistema_os/server/webservice.php'
+
     id = None
     tipo = None
     marca = None
@@ -48,7 +50,7 @@ class Ordem():
         print(data)
         try:
             data = {'tipo':'nova_os', 'nome': self.nome_cliente, 'hardware': self.tipo, 'marca':self.marca,'modelo':self.modelo, 'num_serie':self.num_serie, 'defeito':self.defeito, 'solucao':self.solucao, 'valor':self.valor}
-            req = requests.post('http://localhost/sistema_os/server/webservice.php', data=data, timeout=3000)
+            req = requests.post(self.url, data=data, timeout=3000)
             if int(req.text) > 0:
                 return True
             else:
@@ -60,7 +62,7 @@ class Ordem():
     def buscaros(self):
         try:
             data = {'tipo': 'buscar_os', 'id_os':self.id}
-            req = requests.post('http://localhost/sistema_os/server/webservice.php', data=data, timeout=3000)
+            req = requests.post(self.url, data=data, timeout=3000)
             json = req.json()
             return json
         except:
@@ -70,7 +72,7 @@ class Ordem():
     def alteraros(self):
         try:
             data = {'tipo': 'alterar_os','id_os':self.id, 'hardware':self.tipo, 'marca':self.marca, 'modelo':self.modelo, 'num_serie':self.num_serie, 'defeito':self.defeito, 'solucao':self.solucao, 'valor':self.valor}
-            req = requests.post('http://localhost/sistema_os/server/webservice.php', data=data, timeout=3000)
+            req = requests.post(self.url, data=data, timeout=3000)
             print(req.text)
             if int(req.text) > 0:
                 return True
@@ -83,7 +85,7 @@ class Ordem():
     def deletaros(self):
         try:
             data = {'tipo':'deletar_os', 'id_os':self.id}
-            req = requests.post('http://localhost/sistema_os/server/webservice.php', data=data, timeout=3000)
+            req = requests.post(self.url, data=data, timeout=3000)
             if int(req.text) > 0:
                 return True
             else:
@@ -91,4 +93,17 @@ class Ordem():
         except:
             print("Erro na conexão com banco de dados")
             return False
+
+    def finalizaros(self):
+        try:
+            data = {'tipo':'finalizar_os', 'id_os':self.id}
+            req = requests.post(self.url, data=data, timeout=3000)
+            if int(req.text) > 0:
+                return True
+            else:
+                return False
+        except:
+            print("Erro na conexão com o banco de dados")
+            return False
+            
             
