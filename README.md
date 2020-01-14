@@ -1,6 +1,5 @@
 # Sistema de Ordem de Serviço
-## Sistema de Ordem de Serviço em PyQt
-
+## Sistema de Ordem de Serviço em Python com PyQT5
 <h3>Dependências</h3>
   <ul>PyQt5</ul>
 <br>
