@@ -1,7 +1,10 @@
 # Sistema de Ordem de Serviço
 ## Sistema de Ordem de Serviço em Python com PyQT5
 <h3>Dependências</h3>
-  <ul>PyQt5</ul>
+  <ul>
+  <li>PyQt5</li>
+  <li>MySql</li>
+  </ul>
 <br>
 <h3>Screenshots</h3>
 <h4>Inicio</h4>
